@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="module" src="scriptHigao.js"></script>
+    <title>Trabson do higao</title>
+    
+</head>
+<body>
+    <script>
+        
+        var matrizentrada =
+            [['Cod Entradas: 1 - Entrada Salada verde', '15.90 R$', 'a', ' \n'],
+            ['Cod Entradas: 2 - Entrada Canapés', '18.20 R$ ', 'a', ' \n'],
+            ['Cod Entradas: 3 - Entrada Pão australiano R$', '17.50', 'a', ' \n']]
+
+        var matrizprincipal =
+            [['Cod prato principal: 1 - Prato principal Risoto R$', '37.50', 'Obrigatorio a pedir uma entrada', ' \n'],
+            ['Cod prato principal: 2 - Prato principal Macarrão R$', '28.90', 'Obrigatorio a pedir uma entrada', ' \n'],
+            ['Cod prato principal: 3 - Prato principal Lasanha R$', '25.80', 'Obrigatorio a pedir uma entrada', ' \n'],
+            ['Cod prato principal: 4 - Prato principal Ravioli R$', '22.50', 'Obrigatorio a pedir uma entrada',' \n']]
+
+        var matrizsobremesas =
+            [['Cod sobremesas: 1 - Sobremesas Torta de limão R$', '12.00', 'a', ' \n'],
+            ['Cod sobremesas: 2 - Sobremesas Torta holandesa R$', '12.00', 'a', ' \n'],
+            ['Cod sobremesas: 3 - Sobremesas Mousse de chocolate R$', '8.00', 'a', ' \n']]
+
+        var matrizbebidas =
+            [['Cod Bebidas: 1 - Bebidas Suco R$', '6.00', 'Obrigado a pedir uma bebida', ' \n'],
+            ['Cod Bebidas: 2 - Bebidas Água R$', '2.00', 'Obrigado a pedir uma bebida', ' \n'],
+            ['Cod Bebidas: 3 - Bebidas Refrigerante R$', '6.00', 'Obrigado a pedir uma bebida', ' \n']]
+
+        var matrizbebidasparamaiores =
+            [['Cod Bebidas: 1 - Bebidas Suco R$', '6.00', 'Obrigado a pedir uma bebida', ' \n'],
+            ['Cod Bebidas: 2 - Bebidas Água R$', '2.00', 'Obrigado a pedir uma bebida', ' \n'],
+            ['Cod Bebidas: 3 - Bebidas Refrigerante R$ ', '6.00', 'Obrigado a pedir uma bebida', ' \n'],
+            ['Cod Bebidas: 4 - Bebidas - apenas para maiores Vinho R$', '8.00', 'Obrigado a pedir uma bebida', ' \n']];
+
+        var armazenamento = [,]
+        var continuar = true;
+        var pratoPrincipal = false
+        var bebidaObrigatoria = false               
+        var idades = false
+        
+        //************************************************************************************************************************
+
+        matrizEntrada()
+        while(!pratoPrincipal) matrizPrincipal();
+       matrizSobremesas()
+       bebidasdemaior()
+       
+        var soma = 0
+
+        for (var i = 1; i < armazenamento.length; i++) {
+            soma += parseFloat(armazenamento[i])
+        }
+        
+        document.write("<br>" + "O Total dos pedidos foram  R$ " + soma.toFixed(2))
+
+        
+        //************************************************************************************************************************
+        function matrizEntrada() {
+             continuar = true
+            alert(matrizentrada)
+
+            while (continuar) {
+                posicaopedidos(matrizentrada)
+
+                
+                var cont = prompt("Deseja continuar fazendo seus pedidos:  s/n? ")
+                if (cont === "n") continuar = false
+              }   
+               
+     }
+
+
+        function matrizPrincipal() {
+               continuar = true
+            alert(matrizprincipal)
+              
+            while (continuar) {
+                if(!pratoPrincipal) alert("É necessário pelo menos um prato de principal, veja as opções: ") 
+
+                posicaopedidos(matrizprincipal);
+
+                if(pratoPrincipal){
+                
+
+                var cont = prompt("Deseja continuar fazendo seus pedidos:  s/n?");
+                if (cont === "n") {
+                    continuar = false }
+                else alert("É necessário pelo menos um prato de principal")
+                
+            }
+        }
+}
+        function matrizSobremesas() {
+              continuar = true
+
+            alert(matrizsobremesas)
+
+            while (continuar) {
+                posicaopedidos(matrizsobremesas);
+                var cont = prompt("Deseja continuar fazendo seus pedidos:  s/n?");
+                if (cont === "n") {
+                    continuar = false
+                }
+            }
+        }
+
+
+
+        function bebidasdemaior() {
+       var idade = (prompt(" Digite sua idade"))
+       if(idade == '' || idade == null || isNaN(idade)){
+         alert("Voce nao digitou sua idade")
+         while (!idades) bebidasdemaior() 
+            
+         
+       }
+       else if(idade <=17){
+            idades = true
+         while(!bebidaObrigatoria)matrizBebidas();
+        }else{
+            idades = true
+         while(!bebidaObrigatoria)matrizBebidasMaiorIdade();
+        }
+            
+     } 
+        
+            function matrizBebidas() {
+             continuar = true
+            alert(matrizbebidas)
+
+            while (continuar) {
+                if(!bebidaObrigatoria) alert("É necessário pelo menos uma bebida, veja as opções: ") 
+
+                posicaopedidos(matrizbebidas);
+
+                if(bebidaObrigatoria){
+                var cont = prompt("Deseja continuar fazendo seus pedidos:  s/n?");
+                if (cont === "n") {
+                    continuar = false
+                    
+                }
+                else alert("É necessário pelo menos uma bebida")
+                }
+            
+            }
+        }
+        
+        
+            function matrizBebidasMaiorIdade() {
+              continuar = true
+            alert(matrizbebidasparamaiores)
+
+            while (continuar) {
+                if(!bebidaObrigatoria) alert("É necessário pelo menos uma bebida, veja as opções: ") 
+
+                posicaopedidos(matrizbebidasparamaiores);
+
+                if(bebidaObrigatoria)
+                var cont = prompt("Deseja continuar fazendo seus pedidos:  s/n?");
+                if (cont === "n") {
+                    continuar = false
+                }
+                else alert("É necessário pelo menos uma bebida")
+            }
+        }
+        
+    
+        function posicaopedidos(matriz) {
+
+            var resposta = (prompt("Digite o numero do pedido que deseja"))
+            var posicaoLinha = parseInt(resposta);
+           
+
+            if (resposta === "" || isNaN(resposta) ) alert("Não foi digitado nenhum codigo valido");
+            else if (resposta == null) alert("Você está saindo desse pedido");
+            else if (posicaoLinha > matriz.length) alert("Você digitou um codigo diferente")
+            else {
+
+                var Obrigatorio = matriz[posicaoLinha - 1][2]
+
+                document.write(matriz[posicaoLinha - 1] + "<br>");
+                armazenamento.push([matriz[posicaoLinha - 1][1]]);
+
+                if(Obrigatorio == 'Obrigatorio a pedir uma entrada') pratoPrincipal = true
+                if(Obrigatorio == 'Obrigado a pedir uma bebida') bebidaObrigatoria = true
+                
+            }
+        }     
+        
+
+    </script>
+
+</body>
+</html>
